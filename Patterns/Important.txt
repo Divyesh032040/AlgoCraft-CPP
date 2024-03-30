@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
  Important steps / points which helps to start approaching solve a pattern questions 
 
@@ -12,3 +13,19 @@ IMPORTANT - Outer Loop -> Rows (Lines)   and Inner Loop -> Columns (standing lin
 
 4 - Observe a symmetry ( optional ) 
 
+=======
+
+ Important steps / points which helps to start approaching solve a pattern questions 
+
+IMPORTANT - Outer Loop -> Rows (Lines)   and Inner Loop -> Columns (standing lines)
+
+
+1 - for outer loop focus on the Rows (Lines)
+
+2 - for Inner loop focus on the Colum's and connect them Somehow to the rows
+
+3 - whatever we printing , print inside a Inner Loop
+
+4 - Observe a symmetry ( optional ) 
+
+>>>>>>> 4dc8c7edf9d91f1b14959e33876307a1ae5ceb20
