@@ -1,110 +1,127 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using namespace std;
 
-int BruteForceOne( int arr[] , int n , int k){
-    int longest=0;
-    for(int i = 0; i<n ; i++){
-        for(int j=i ; j<n ; j++){
-             int sum = 0;
-            for(int k=i ; k<=j ; k++){
+int BruteForceOne(int arr[], int n, int k)
+{
+    int longest = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j < n; j++)
+        {
+            int sum = 0;
+            for (int k = i; k <= j; k++)
+            {
                 sum = sum + arr[k];
             }
-            if(sum == k)
-                longest = max( longest , j-i+1 );
+            if (sum == k)
+                longest = max(longest, j - i + 1);
         }
-       
     }
-     return longest;
+    return longest;
 }
 
-int BruteForceTwo( int arr[] , int n , int k){
+int BruteForceTwo(int arr[], int n, int k)
+{
     int longest = 0;
     long long sum = 0;
-    for(int i = 0; i<n ; i++){
-        for(int j=i ; j<n ; j++){
-              sum = sum + arr[j];
-            if(sum == k)
-                longest = max( longest , j-i+1 );
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j < n; j++)
+        {
+            sum = sum + arr[j];
+            if (sum == k)
+                longest = max(longest, j - i + 1);
         }
     }
-     return longest;
+    return longest;
 }
 
-int LongestSubarraywithsumKBatter (vector<int>a , int k){
-    int sum =0;
-    int maxLen =0;
-    map< long long , int >preSumMap;
-    
-    for(int i=0;i<a.size();i++){
-      sum += a[i];
-      if(sum == k){
-          maxLen = max( maxLen , i+1);
-      }
-       //remaining arr
-   int rem = sum - k;
-   if(preSumMap.find(rem) != preSumMap.end()){
-      int len = i - preSumMap[rem];
-      maxLen = max(maxLen , len);
-   }
-   
-   if(preSumMap.find(rem)==preSumMap.end()){
-       preSumMap[sum] = i ;
-   }
-}
-   return maxLen;
-}
-
-int getLongestSubarrayOptimized(vector<int>& a, long long k) {
-    int left = 0;
-    int right = 0;
-    int sum = a[0];
+int LongestSubarraywithsumKBatter(vector<int> a, int k)
+{
+    int sum = 0;
     int maxLen = 0;
-    int n = a.size();
-    
-    while(right < n){
-        while(left <= right && sum > k){
-            sum = sum - a[left];
-            left++;
+    map<long long, int> preSumMap;
+
+    for (int i = 0; i < a.size(); i++)
+    {
+        sum += a[i];
+        if (sum == k)
+        {
+            maxLen = max(maxLen, i + 1);
         }
-        if(sum == k){
-        maxLen = max(maxLen,right - left + 1);
+        // remaining arr
+        int rem = sum - k;
+        if (preSumMap.find(rem) != preSumMap.end())
+        {
+            int len = i - preSumMap[rem];
+            maxLen = max(maxLen, len);
         }
-    right++;
-    if(right<n) sum += a[right];
-    
-        
+
+        if (preSumMap.find(rem) == preSumMap.end())
+        {
+            preSumMap[sum] = i;
+        }
     }
     return maxLen;
 }
 
-int main() {
+int getLongestSubarray(vector<int> &nums, long long k)
+{
+    int n = nums.size();
+    int left = 0;
+    int right = 0;
+    int maxLen = 0;
+    int sum = nums[0];
 
-int n;
-cout<<"enter size of array : "<<endl;
-cin>>n;
+    while (right < n)
+    {
 
-int arr[n];
-cout<<"enter the size of array"<<endl;
-for(int i=0;i<n;i++){
-    cin>>arr[i];
+        while (sum > k && left <= right)
+        {
+            sum -= nums[left];
+            left++;
+        }
+        if (sum == k)
+        {
+            maxLen = max(maxLen, right - left + 1);
+        }
+        right++;
+        if (right < n)
+            sum += nums[right];
+    }
+    return maxLen;
 }
 
-int k;
-cout<<"enter the sum"<<endl;
-cin>>k;
+int main()
+{
 
-int ans1 = BruteForceOne(arr,n,k);
+    int n;
+    cout << "enter size of array : " << endl;
+    cin >> n;
 
-int ans2 = BruteForceTwo(arr,n,k);
+    int arr[n];
+    cout << "enter the size of array" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
 
-int ans3 = LongestSubarraywithsumKBatter(arr,k);
+    int k;
+    cout << "enter the sum" << endl;
+    cin >> k;
 
-int ans4 = getLongestSubarrayOptimized(arr,k);
+    int ans1 = BruteForceOne(arr, n, k);
 
-cout<<"longest Sub-array with sum is:"<<endl;
-cout<<ans;
+    int ans2 = BruteForceTwo(arr, n, k);
 
-return 0;
+    int ans3 = LongestSubarraywithsumKBatter(arr, k);
+
+    int ans4 = getLongestSubarrayOptimized(arr, k);
+
+    cout << "longest Sub-array with sum is:" << endl;
+    cout << ans;
+
+    return 0;
 }
 
 /*
